@@ -1,23 +1,28 @@
 ﻿param(
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory=$false, ParameterSetName="cleanup")]
+      [switch] $Cleanup,
+
+      [Parameter(ParameterSetName="create")]
+      [Parameter(Mandatory=$true, ParameterSetName="cleanup")]
       [string] $SubscriptionName,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(ParameterSetName="create")]
+      [Parameter(Mandatory=$true, ParameterSetName="cleanup")]
       [string] $ResourceGroupName,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory=$true, ParameterSetName="create")]
       [string] $ResourceGroupLocation,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory=$true, ParameterSetName="create")]
       [string] $EventHubNamespaceName,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory=$true, ParameterSetName="create")]
       [string] $EventHubName,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory=$true, ParameterSetName="cleanup")]
       [string] $AdxClusterName,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory=$true, ParameterSetName="create")]
       [string] $AdxDatabaseName
 )
 
@@ -26,6 +31,22 @@ az login
 
 az account set --subscription $SubscriptionName
 Write-Host "Using subscription '$SubscriptionName'."
+
+if ($Cleanup)
+{
+    Write-Host "Removing service principal"
+    $appId = az ad sp list `
+        --display-name $AdxClusterName `
+        --query '[].{appId:appId}' `
+        -o tsv
+
+    az ad sp delete --id $appId
+
+    Write-Host "Removing resource group..."
+    az group delete --name $ResourceGroupName --yes
+
+    return
+}
 
 Write-Host "Creating resource group..."
 
@@ -115,9 +136,3 @@ az ad sp create-for-rbac `
     --scopes /subscriptions/$subscriptionId/resourceGroups/$ResourceGroupName
 
 Write-Warning "END COPY here"
-
-# Cleanup:
-#
-# az ad sp delete --id [appId]
-#
-# az group delete --name [name] --yes
