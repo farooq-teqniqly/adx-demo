@@ -94,3 +94,11 @@ ForEach ($ruleName in $ruleNames)
         --query '[keyName, primaryConnectionString]' `
         -o json
 }
+
+
+Write-Host "Kusto cluster data ingestion URI:"
+
+az kusto cluster show `
+    --name $AdxClusterName `
+    --resource-group $ResourceGroupName `
+    --query dataIngestionUri
