@@ -2,11 +2,11 @@
       [Parameter(Mandatory=$false, ParameterSetName="cleanup")]
       [switch] $Cleanup,
 
-      [Parameter(ParameterSetName="create")]
+      [Parameter(Mandatory=$true, ParameterSetName="create")]
       [Parameter(Mandatory=$true, ParameterSetName="cleanup")]
       [string] $SubscriptionName,
 
-      [Parameter(ParameterSetName="create")]
+      [Parameter(Mandatory=$true, ParameterSetName="create")]
       [Parameter(Mandatory=$true, ParameterSetName="cleanup")]
       [string] $ResourceGroupName,
 
@@ -19,6 +19,7 @@
       [Parameter(Mandatory=$true, ParameterSetName="create")]
       [string] $EventHubName,
 
+      [Parameter(Mandatory=$true, ParameterSetName="create")]
       [Parameter(Mandatory=$true, ParameterSetName="cleanup")]
       [string] $AdxClusterName,
 
