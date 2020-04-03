@@ -74,6 +74,8 @@ az kusto database create `
     --soft-delete-period P7D `
     --hot-cache-period P7D
 
+Write-Warning "Copy the output below. It is needed to run the demo."
+Write-Warning "BEGIN COPY here"
 
 Write-Host "Event hub namespace connection strings:"
 
@@ -102,3 +104,20 @@ az kusto cluster show `
     --name $AdxClusterName `
     --resource-group $ResourceGroupName `
     --query dataIngestionUri
+
+Write-Host "Creating service principal"
+
+$subscriptionId = az account show --subscription $SubscriptionName --query id
+
+az ad sp create-for-rbac `
+    --name $AdxClusterName `
+    --role contributor `
+    --scopes /subscriptions/$subscriptionId/resourceGroups/$ResourceGroupName
+
+Write-Warning "END COPY here"
+
+# Cleanup:
+#
+# az ad sp delete --id [appId]
+#
+# az group delete --name [name] --yes
