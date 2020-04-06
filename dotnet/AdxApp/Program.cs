@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.ServiceBus.Messaging;
 
 namespace AdxApp
@@ -7,10 +8,12 @@ namespace AdxApp
     {
         static void Main(string[] args)
         {
-            var eventHubConnectionString = "Endpoint=sb://fm-d-usw2-adx-demo-eh-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yNdNMdUyjAMb2t8eQ8P2uh19EtBpej9RGXmgI7kU3mc=";
-            var eventHubName = "fm-d-usw2-adx-demo-eh";
-            var storageAccountName = "fmdusw2adxdemosto";
-            var storageAccountKey = "IWH5uErqU31wQlLs7w68avQXzCITBOxhPPjGzG62CPtZaQMotAadY7u74g5JyiAprFNWrXzGcCKuUyVe+HiIAg==";
+            var appSettings = ConfigurationManager.AppSettings;
+
+            var eventHubConnectionString = appSettings["eventHubConnectionString"];
+            var eventHubName = appSettings["eventHubName"];
+            var storageAccountName = appSettings["storageAccountName"];
+            var storageAccountKey = appSettings["storageAccountKey"];
             var storageConnectionString = $"DefaultEndpointsProtocol=https;AccountName={storageAccountName};AccountKey={storageAccountKey}";
 
             var eventProcessorHostName = Guid.NewGuid().ToString();
