@@ -12,6 +12,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdxLib", "AdxLib\AdxLib.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdxApp", "AdxApp\AdxApp.csproj", "{4BE79C23-2ABC-4242-A730-C2348F9334FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemetryApp", "TelemetryApp\TelemetryApp.csproj", "{974A2707-114C-4B34-8AD4-6757D9D3B2C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdxAppTests", "AdxAppTests\AdxAppTests.csproj", "{A7537B0D-1915-424E-A19A-DE85344074B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{4BE79C23-2ABC-4242-A730-C2348F9334FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE79C23-2ABC-4242-A730-C2348F9334FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE79C23-2ABC-4242-A730-C2348F9334FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{974A2707-114C-4B34-8AD4-6757D9D3B2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{974A2707-114C-4B34-8AD4-6757D9D3B2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{974A2707-114C-4B34-8AD4-6757D9D3B2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{974A2707-114C-4B34-8AD4-6757D9D3B2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7537B0D-1915-424E-A19A-DE85344074B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7537B0D-1915-424E-A19A-DE85344074B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7537B0D-1915-424E-A19A-DE85344074B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7537B0D-1915-424E-A19A-DE85344074B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

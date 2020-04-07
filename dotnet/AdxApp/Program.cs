@@ -24,7 +24,9 @@ namespace AdxApp
             var options = new EventProcessorOptions();
 
             options.ExceptionReceived += (sender, e) => WriteException(e.Exception);
-            
+
+            var messagesReceived = 0;
+
             var eventProcessorFactory = new TelemetryEventProcessorFactory(
                 (sender, e) =>
                     WriteInformation(
@@ -33,8 +35,15 @@ namespace AdxApp
                     WriteInformation(
                         $"EventProcessor shutting down.  Partition: '{e.PartitionId}', Offset: '{e.Offset}'"),
                 (sender, e) =>
-                    WriteInformation(
-                        $"Message received. Partition: '{e.PartitionId}', Offset: '{e.Offset}', Body: {e.Body}"));
+                {
+                    messagesReceived++;
+
+                    if (messagesReceived > 0 && messagesReceived % 5 == 0)
+                    {
+                        WriteInformation(
+                            $"{messagesReceived} messages received.");
+                    }
+                });
 
             eventProcessorHost.RegisterEventProcessorFactoryAsync(eventProcessorFactory, options).Wait();
 
